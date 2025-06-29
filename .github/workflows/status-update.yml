@@ -72,8 +72,16 @@ jobs:
               affectedServices = allServices.filter(service => issueLabels.includes(service));
             }
 
+            // Ensure assets directory exists
+            const assetsDir = path.join(process.env.GITHUB_WORKSPACE, 'assets');
+            if (!fs.existsSync(assetsDir)) {
+              fs.mkdirSync(assetsDir, { recursive: true });
+            }
+
+            let statusData;
+
             if (issueState === 'closed') {
-              const statusData = {
+              statusData = {
                 title: completionTitle,
                 link: `https://status.haulrest.me/incident/${issueNumber}`,
                 createdTime: new Date().toISOString(),
@@ -81,19 +89,13 @@ jobs:
                 category: category
               };
             } else {
-              const statusData = {
+              statusData = {
                 title: issueTitle,
                 link: `https://status.haulrest.me/incident/${issueNumber}`,
                 createdTime: new Date().toISOString(),
                 effect: affectedServices,
                 category: category
               };
-            }
-
-            // Ensure assets directory exists
-            const assetsDir = path.join(process.env.GITHUB_WORKSPACE, 'assets');
-            if (!fs.existsSync(assetsDir)) {
-              fs.mkdirSync(assetsDir, { recursive: true });
             }
 
             // Write status file
