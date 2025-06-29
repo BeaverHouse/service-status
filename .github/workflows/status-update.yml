@@ -49,10 +49,10 @@ jobs:
 
             if (isMaintenanceIssue) {
               category = 'maintenance';
-              completionTitle = '점검이 완료되었습니다';
+              completionTitle = 'Maintenance completed';
             } else if (hasStatusLabel) {
               category = 'incident';
-              completionTitle = '장애가 해결되었습니다';
+              completionTitle = 'Incident migitated';
             }
 
             // Determine affected services
@@ -82,6 +82,7 @@ jobs:
 
             if (issueState === 'closed') {
               statusData = {
+                state: issueState,
                 title: completionTitle,
                 link: `https://status.haulrest.me/incident/${issueNumber}`,
                 createdTime: new Date().toISOString(),
@@ -90,6 +91,7 @@ jobs:
               };
             } else {
               statusData = {
+                state: issueState,
                 title: issueTitle,
                 link: `https://status.haulrest.me/incident/${issueNumber}`,
                 createdTime: new Date().toISOString(),
