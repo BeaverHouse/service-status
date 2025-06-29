@@ -1,7 +1,8 @@
 {
-  "title": "[Scheduled Maintenance] 테스트입니다.",
+  "state": "closed",
+  "title": "Maintenance completed",
   "link": "https://status.haulrest.me/incident/8",
-  "createdTime": "2025-06-29T11:34:29.474Z",
+  "createdTime": "2025-06-29T12:56:03.413Z",
   "effect": [
     "aecheck",
     "ba-torment"
