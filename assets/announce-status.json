@@ -1,8 +1,8 @@
 {
-  "state": "closed",
-  "title": "Maintenance completed",
-  "link": "https://status.haulrest.me/incident/8",
-  "createdTime": "2025-06-29T12:56:03.413Z",
+  "state": "open",
+  "title": "[Maintenance] 7/6 야간 서버 작업 (Nightly server operations)",
+  "link": "https://status.haulrest.me/incident/18",
+  "createdTime": "2025-06-29T13:25:41.762Z",
   "effect": [
     "aecheck",
     "ba-torment"
