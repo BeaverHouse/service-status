@@ -22,3 +22,12 @@
   color: FFFDDC
 - name: "Test"
   color: F6B26B
+
+- name: "maintenance"
+  color: 00A86B
+- name: "status"
+  color: 003366
+- name: "aecheck"
+  color: FFFFFF
+- name: "ba-torment"
+  color: FFFFFF
