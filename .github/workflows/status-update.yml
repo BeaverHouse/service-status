@@ -2,7 +2,7 @@ name: Update Current Status
 
 on:
   issues:
-    types: [opened, edited, closed, reopened]
+    types: [opened, edited, closed, reopened, locked, unlocked]
 
 jobs:
   update-status:
