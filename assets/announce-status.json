@@ -1,0 +1,10 @@
+{
+  "title": "[Scheduled Maintenance] 테스트입니다.",
+  "link": "https://status.haulrest.me/incident/8",
+  "createdTime": "2025-06-29T07:19:54.449Z",
+  "effect": [
+    "aecheck",
+    "ba-torment"
+  ],
+  "category": "maintenance"
+}
