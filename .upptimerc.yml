@@ -4,8 +4,10 @@ repo: service-status
 sites:
   - name: AE Check API
     url: https://api.haulrest.me/aecheck/docs
+    slug: aecheck
   - name: BA Torment API
     url: https://api.haulrest.me/ba-torment/
+    slug: ba-torment
 
 status-website:
   cname: status.haulrest.me
