@@ -73,7 +73,7 @@ jobs:
           PR_LINK=$(gh pr create \
             --title "${{ steps.get-issue.outputs.issue_title }}" \
             --body "${{ steps.get-pr-body.outputs.pr_body }}" \
-            --base main \
+            --base master \
             --head "${{ github.ref_name }}" \
             --assignee "${{ github.actor }}" \
             --label "${{ steps.get-issue.outputs.labels }}" 2>/dev/null || true)
