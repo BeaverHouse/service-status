@@ -1,0 +1,115 @@
+name: Update Current Status
+
+on:
+  issues:
+    types: [opened, edited, closed, reopened]
+
+jobs:
+  update-status:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT || github.token }}
+          fetch-depth: 0
+
+      - name: Update status JSON
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            // Get issue information
+            const issue = context.payload.issue;
+            const issueNumber = issue.number;
+            const issueTitle = issue.title;
+            const issueBody = issue.body || '';
+            const issueLabels = issue.labels.map(label => label.name);
+            const issueState = issue.state;
+
+            console.log('Issue:', issueNumber, issueTitle);
+            console.log('Labels:', issueLabels);
+            console.log('State:', issueState);
+
+            // Check if this is a relevant issue (has status or maintenance labels)
+            const isMaintenanceIssue = issueLabels.includes('maintenance');
+            const hasStatusLabel = issueLabels.includes('status');
+
+            if (!isMaintenanceIssue && !hasStatusLabel) {
+              console.log('Issue is not related to status or maintenance, skipping...');
+              return;
+            }
+
+            // Determine category and completion message
+            let category = '';
+            let completionTitle = '';
+
+            if (isMaintenanceIssue) {
+              category = 'maintenance';
+              completionTitle = '점검이 완료되었습니다';
+            } else if (hasStatusLabel) {
+              category = 'incident';
+              completionTitle = '장애가 해결되었습니다';
+            }
+
+            // Determine affected services
+            let affectedServices = [];
+
+            if (isMaintenanceIssue) {
+              // For maintenance issues, parse expectedDown from issue body
+              const expectedDownMatch = issueBody.match(/expectedDown:\s*([^\n\r]+)/);
+              if (expectedDownMatch) {
+                affectedServices = expectedDownMatch[1]
+                  .split(',')
+                  .map(service => service.trim())
+                  .filter(service => service);
+              }
+            } else {
+              const allServices = ['aecheck', 'ba-torment'];
+              affectedServices = allServices.filter(service => issueLabels.includes(service));
+            }
+
+            if (issueState === 'closed') {
+              const statusData = {
+                title: completionTitle,
+                link: `https://status.haulrest.me/incident/${issueNumber}`,
+                createdTime: new Date().toISOString(),
+                effect: affectedServices,
+                category: category
+              };
+            } else {
+              const statusData = {
+                title: issueTitle,
+                link: `https://status.haulrest.me/incident/${issueNumber}`,
+                createdTime: new Date().toISOString(),
+                effect: affectedServices,
+                category: category
+              };
+            }
+
+            // Ensure assets directory exists
+            const assetsDir = path.join(process.env.GITHUB_WORKSPACE, 'assets');
+            if (!fs.existsSync(assetsDir)) {
+              fs.mkdirSync(assetsDir, { recursive: true });
+            }
+
+            // Write status file
+            const statusFilePath = path.join(assetsDir, 'announce-status.json');
+            fs.writeFileSync(statusFilePath, JSON.stringify(statusData, null, 2));
+
+            console.log('Status file updated:', statusData);
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add assets/announce-status.json || git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update announce status for issue #${{ github.event.issue.number }}" -m "이슈 #${{ github.event.issue.number }}에 대한 상태 공지를 업데이트합니다."
+            git push
+          fi
