@@ -1,8 +1,8 @@
 {
-  "state": "open",
-  "title": "🛑 BA Torment API is down",
+  "state": "closed",
+  "title": "Incident migitated",
   "link": "https://status.haulrest.me/incident/20",
-  "createdTime": "2025-07-03T07:39:46.904Z",
+  "createdTime": "2025-07-03T08:15:23.460Z",
   "effect": [
     "ba-torment"
   ],
