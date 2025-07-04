@@ -1,11 +1,10 @@
 {
   "state": "open",
-  "title": "[Maintenance] 7/6 야간 서버 작업 (Nightly server operations)",
-  "link": "https://status.haulrest.me/incident/18",
-  "createdTime": "2025-06-29T13:28:35.729Z",
+  "title": "🛑 AE Check API is down",
+  "link": "https://status.haulrest.me/incident/19",
+  "createdTime": "2025-07-04T02:36:25.924Z",
   "effect": [
-    "aecheck",
-    "ba-torment"
+    "aecheck"
   ],
-  "category": "maintenance"
+  "category": "incident"
 }
