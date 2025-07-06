@@ -1,7 +1,7 @@
 url: https://api.haulrest.me/ba-torment/
-status: down
-code: 502
-responseTime: 277
-lastUpdated: 2025-07-06T12:59:45.897Z
+status: up
+code: 200
+responseTime: 255
+lastUpdated: 2025-07-06T13:33:09.493Z
 startTime: 2025-06-29T07:10:42.822Z
 generator: Upptime <https://github.com/upptime/upptime>
