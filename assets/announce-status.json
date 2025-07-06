@@ -1,11 +1,10 @@
 {
   "state": "closed",
-  "title": "Maintenance completed",
-  "link": "https://status.haulrest.me/incident/18",
-  "createdTime": "2025-07-05T18:13:05.270Z",
+  "title": "Incident migitated",
+  "link": "https://status.haulrest.me/incident/19",
+  "createdTime": "2025-07-06T17:16:39.675Z",
   "effect": [
-    "aecheck",
-    "ba-torment"
+    "aecheck"
   ],
-  "category": "maintenance"
+  "category": "incident"
 }
