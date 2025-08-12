@@ -1,8 +1,8 @@
 {
-  "state": "closed",
-  "title": "Incident migitated",
-  "link": "https://status.haulrest.me/incident/19",
-  "createdTime": "2025-07-06T17:16:39.675Z",
+  "state": "open",
+  "title": "🛑 AE Check API is down",
+  "link": "https://status.haulrest.me/incident/30",
+  "createdTime": "2025-08-11T19:47:01.980Z",
   "effect": [
     "aecheck"
   ],
